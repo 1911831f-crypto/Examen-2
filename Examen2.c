@@ -8,7 +8,7 @@ typedef struct Nodo {
     struct Nodo *der;
 } Nodo;
 
-// Crear nodo
+// Creo el nodo
 Nodo* crearNodo(int valor) {
     Nodo *nuevo = (Nodo*)malloc(sizeof(Nodo));
     nuevo->dato = valor;
@@ -17,7 +17,7 @@ Nodo* crearNodo(int valor) {
     return nuevo;
 }
 
-// Insertar en ABB
+
 Nodo* insertar(Nodo *raiz, int valor) {
     if (raiz == NULL)
         return crearNodo(valor);
@@ -30,28 +30,25 @@ Nodo* insertar(Nodo *raiz, int valor) {
     return raiz;
 }
 
-// ------------------------------
-// 1) ¿Árbol lleno?
-// ------------------------------
+
+//   Esto dice si el arbol esta lleno
+
 int esLleno(Nodo *raiz) {
     if (raiz == NULL)
-        return 1; // Árbol vacío se considera lleno
-
-    // Caso en que tiene ambos hijos
+        return 1; 
+    
     if (raiz->izq != NULL && raiz->der != NULL)
         return esLleno(raiz->izq) && esLleno(raiz->der);
 
-    // Caso en que no tiene hijos (nodo hoja)
     if (raiz->izq == NULL && raiz->der == NULL)
         return 1;
-
-    // Si tiene solo un hijo -> NO es lleno
+    
     return 0;
 }
 
-// ------------------------------
-// 2) ¿Es padre? + Mostrar hijos
-// ------------------------------
+
+// ESto muestra si es padre y el numero de hijos
+
 int esPadre(Nodo *raiz, int valor) {
     Nodo *actual = raiz;
 
@@ -70,7 +67,7 @@ int esPadre(Nodo *raiz, int valor) {
         return 0;
     }
 
-    // Contar hijos
+    // Con esto cuenta hijos
     int hijos = 0;
     if (actual->izq != NULL) hijos++;
     if (actual->der != NULL) hijos++;
@@ -87,9 +84,9 @@ int esPadre(Nodo *raiz, int valor) {
     }
 }
 
-// ------------------------------
-// 3) Contar nodos padre
-// ------------------------------
+
+// Con esto cuneta todos los nodso padre que hay 
+
 int contarPadres(Nodo *raiz) {
     if (raiz == NULL)
         return 0;
@@ -102,9 +99,9 @@ int contarPadres(Nodo *raiz) {
     return es_padre + contarPadres(raiz->izq) + contarPadres(raiz->der);
 }
 
-// ------------------------------
-// Recorridos
-// ------------------------------
+
+// A qui pone cuales son los recorridos
+
 void inOrden(Nodo *raiz) {
     if (raiz == NULL) return;
     inOrden(raiz->izq);
@@ -126,9 +123,9 @@ void postOrden(Nodo *raiz) {
     printf("%d ", raiz->dato);
 }
 
-// ------------------------------
+
 //         MENÚ PRINCIPAL
-// ------------------------------
+
 int main() {
     Nodo *raiz = NULL;
     int opcion, valor;
